@@ -1,0 +1,27 @@
+{% extends "base_navbar.html" %}
+{% load static %}
+
+{% block title %}Configurações{% endblock title %}
+
+{% block conteudo %}
+<div class="container mt-4">
+
+    <h2 class="mb-4">⚙️ Configurações</h2>
+    <p>Escolha uma das opções abaixo:</p>
+
+    <div class="list-group">
+
+        <!-- Listar Todos os Usuários -->
+        <a href="{% url 'user_list' %}" class="list-group-item list-group-item-action">
+            📋 Gerenciamento de Usuários
+        </a>
+
+        <!-- Minha Conta -->
+        <a href="{% url 'user_edit' request.user.pk %}" class="list-group-item list-group-item-action">
+            👤 Minha Conta
+        </a>
+
+    </div>
+
+</div>
+{% endblock conteudo %}
