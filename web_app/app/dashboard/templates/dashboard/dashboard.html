@@ -1,0 +1,29 @@
+{% extends "base_navbar.html" %}
+{% load static %}
+
+{% block title %}Dashboard{% endblock title %}
+
+{% block conteudo %}
+<div class="container mt-4">
+
+    <h2 class="mb-4">🔧 Dashboard</h2>
+    <p>Bem-vindo ao sistema de predições de eficiência energética.</p>
+
+    <div class="list-group mb-4">
+
+        <!-- Link para testar o modelo -->
+        <a href="{% url 'test_model' %}" class="list-group-item list-group-item-action">
+            🔎 Testar Modelo de Regressão
+        </a>
+
+        <!-- Link para configurações -->
+        <a href="{% url 'config' %}" class="list-group-item list-group-item-action">
+            ⚙️ Configurações e Gerenciamento de Usuários
+        </a>
+
+    </div>
+
+    <p class="text-muted">Utilize os links acima para acessar as funcionalidades do sistema.</p>
+
+</div>
+{% endblock conteudo %}

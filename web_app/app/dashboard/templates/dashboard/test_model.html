@@ -1,0 +1,49 @@
+{% extends "base_navbar.html" %}
+
+{% block title %}Testar Modelo{% endblock title %}
+
+{% block conteudo %}
+<div class="container mt-4" style="max-width: 900px;">
+    <div class="card shadow-sm">
+        <div class="card-header bg-dark text-white text-center">
+            <h2 class="mb-0">🔎 Testar Modelo de Regressão</h2>
+        </div>
+        <div class="card-body bg-light">
+
+            <form method="post" class="mb-3">
+                {% csrf_token %}
+
+                <div class="row">
+                    {% for field in form %}
+                    <div class="col-md-6 mb-3">
+                        {{ field.label_tag }}
+                        {{ field }}
+                        {% for error in field.errors %}
+                            <div class="text-danger">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <button type="submit" class="btn btn-dark w-100">Gerar Predição</button>
+            </form>
+
+            {% if carga_aquecimento %}
+            <div class="card mt-4 border-success">
+                <div class="card-header bg-success text-white">
+                    <strong>Resultados da Predição</strong>
+                </div>
+                <div class="card-body">
+                    <p><strong>Carga de Aquecimento:</strong> {{ carga_aquecimento }}</p>
+                    {% if carga_resfriamento %}
+                    <p><strong>Carga de Resfriamento:</strong> {{ carga_resfriamento }}</p>
+                    {% endif %}
+                </div>
+            </div>
+            {% endif %}
+
+            <a href="{% url 'dashboard' %}" class="btn btn-secondary w-100 mt-3">Voltar para o Dashboard</a>
+        </div>
+    </div>
+</div>
+{% endblock conteudo %}

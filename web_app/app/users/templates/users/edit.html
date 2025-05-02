@@ -1,0 +1,83 @@
+{% extends "base_navbar.html" %}
+
+{% block title %}Editar Perfil{% endblock title %}
+
+{% block conteudo %}
+<div class="container mt-4" style="max-width: 500px;">
+    <div class="card shadow-sm">
+        <div class="card-header bg-dark text-white text-center">
+            <h2 class="mb-0">Editar Perfil</h2>
+        </div>
+        <div class="card-body bg-light">
+
+            <form method="post" class="mb-3">
+                {% csrf_token %}
+
+                {% if form.non_field_errors %}
+                    <div class="alert alert-danger">
+                        {{ form.non_field_errors }}
+                    </div>
+                {% endif %}
+
+                <div class="mb-3">
+                    {{ form.full_name.label_tag }}
+                    {{ form.full_name }}
+                    {% for error in form.full_name.errors %}
+                        <div class="text-danger">{{ error }}</div>
+                    {% endfor %}
+                </div>
+
+                <div class="mb-3">
+                    {{ form.email.label_tag }}
+                    {{ form.email }}
+                    {% for error in form.email.errors %}
+                        <div class="text-danger">{{ error }}</div>
+                    {% endfor %}
+                </div>
+
+                <div class="mb-3">
+                    {{ form.phone.label_tag }}
+                    {{ form.phone }}
+                    {% for error in form.phone.errors %}
+                        <div class="text-danger">{{ error }}</div>
+                    {% endfor %}
+                </div>
+
+                <div class="mb-3">
+                    {{ form.password1.label_tag }}
+                    {{ form.password1 }}
+                    {% for error in form.password1.errors %}
+                        <div class="text-danger">{{ error }}</div>
+                    {% endfor %}
+                </div>
+
+                <div class="mb-3">
+                    {{ form.password2.label_tag }}
+                    {{ form.password2 }}
+                    {% for error in form.password2.errors %}
+                        <div class="text-danger">{{ error }}</div>
+                    {% endfor %}
+                </div>
+
+                <button type="submit" class="btn btn-dark w-100">Salvar Alterações</button>
+            </form>
+
+            <form method="post" action="{% url 'delete_account' user.pk %}">
+                {% csrf_token %}
+                <button 
+                    type="button" 
+                    class="btn btn-danger w-100 delete-button" 
+                    data-bs-toggle="modal" 
+                    data-bs-target="#confirmDeleteModal">
+                    Excluir Conta
+                </button>
+            </form>
+
+            <a href="{{ back_url }}" class="btn btn-secondary w-100 mt-2">Voltar</a>
+
+        </div>
+    </div>
+</div>
+
+{% include "confirm_delete_modal.html" with message="Tem certeza que deseja excluir sua conta? Esta ação não pode ser desfeita." %}
+{% endblock conteudo %}
